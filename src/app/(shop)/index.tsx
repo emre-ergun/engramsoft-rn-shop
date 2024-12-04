@@ -1,11 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { PRODUCTS } from '../../../assets/products';
+import ProductListItem from '../../components/product-list-item';
+import ListHeader from '../../components/list-header';
 
 const Home = () => {
   return (
-    <View style={styles.viewContainer}>
-      <Text>Home</Text>
-      <StatusBar style='auto' />
+    <View>
+      <FlatList
+        data={PRODUCTS}
+        renderItem={({ item }) => <ProductListItem product={item} />}
+        keyExtractor={item => item.id.toString()}
+        numColumns={2}
+        ListHeaderComponent={ListHeader}
+        contentContainerStyle={styles.flatListContainer}
+        columnWrapperStyle={styles.flatListColumn}
+        style={{ paddingHorizontal: 10, paddingVertical: 5 }}
+      />
     </View>
   );
 };
@@ -13,5 +24,10 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  viewContainer: {},
+  flatListContainer: {
+    paddingBottom: 20,
+  },
+  flatListColumn: {
+    justifyContent: 'space-between',
+  },
 });

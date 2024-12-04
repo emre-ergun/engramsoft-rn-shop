@@ -20,6 +20,7 @@ const TabsLayout = () => {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             paddingTop: 10,
+            minHeight: 80,
           },
           headerShown: false,
         }}
