@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 
 const ProductListItem = ({ product }: { product: Product }) => {
   return (
-    <Link href={`/products/${product.slug}`} asChild>
+    <Link href={`/product/${product.slug}`} asChild>
       <Pressable style={styles.item}>
         <View style={styles.itemImageContainer}>
           <Image source={product.heroImage} style={styles.itemImage} />
