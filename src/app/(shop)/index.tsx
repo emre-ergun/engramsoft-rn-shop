@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { PRODUCTS } from '../../../assets/products';
 import ProductListItem from '../../components/product-list-item';
 import ListHeader from '../../components/list-header';
