@@ -9,6 +9,7 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import * as zod from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { StatusBar } from 'expo-status-bar';
 
 const authScheme = zod.object({
   email: zod.string().email({ message: 'Invalid email address' }),
@@ -40,6 +41,7 @@ const Auth = () => {
       }}
       style={styles.backgroundImage}
     >
+      <StatusBar style='light' />
       <View style={styles.overlay} />
       <View style={styles.container}>
         <Text style={styles.title}>Welcome</Text>
