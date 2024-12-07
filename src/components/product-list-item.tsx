@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Link } from 'expo-router';
-import { TablesInsert } from '../types/database.type';
+import { Tables } from '../types/database.type';
 
-const ProductListItem = ({ product }: { product: TablesInsert<'product'> }) => {
+const ProductListItem = ({ product }: { product: Tables<'product'> }) => {
   return (
     <Link href={`/product/${product.slug}`} asChild>
       <Pressable style={styles.item}>

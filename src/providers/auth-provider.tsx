@@ -7,11 +7,11 @@ import {
   useState,
 } from 'react';
 import { supabase } from '../lib/supabase';
-import { TablesInsert } from '../types/database.type';
+import { Tables } from '../types/database.type';
 
 type AuthData = {
   session: Session | null;
-  user: TablesInsert<'users'> | null;
+  user: Tables<'users'> | null;
   mouinting: boolean;
 };
 
@@ -23,7 +23,7 @@ const AuthContext = createContext<AuthData>({
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
   const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<TablesInsert<'users'> | null>(null);
+  const [user, setUser] = useState<Tables<'users'> | null>(null);
   const [mouinting, setMouinting] = useState(true);
 
   useEffect(() => {

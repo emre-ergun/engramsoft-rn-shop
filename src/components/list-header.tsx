@@ -12,11 +12,11 @@ import { FontAwesome } from '@expo/vector-icons';
 import { CATEGORIES } from '../../assets/categories';
 import { useCartStore } from '../store/cart-store';
 import { supabase } from '../lib/supabase';
-import { TablesInsert } from '../types/database.type';
+import { Tables } from '../types/database.type';
 import { useAuth } from '../providers/auth-provider';
 
 type Props = {
-  categories: TablesInsert<'category'>[];
+  categories: Tables<'category'>[];
 };
 
 const ListHeader = ({ categories }: Props) => {
