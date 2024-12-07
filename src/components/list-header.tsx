@@ -13,13 +13,15 @@ import { CATEGORIES } from '../../assets/categories';
 import { useCartStore } from '../store/cart-store';
 import { supabase } from '../lib/supabase';
 import { TablesInsert } from '../types/database.type';
+import { useAuth } from '../providers/auth-provider';
 
 type Props = {
   categories: TablesInsert<'category'>[];
-};  
+};
 
-const ListHeader = ({categories}: Props) => {
+const ListHeader = ({ categories }: Props) => {
   const { getItemCount } = useCartStore();
+  const { user } = useAuth();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -31,10 +33,14 @@ const ListHeader = ({categories}: Props) => {
         <View style={styles.headerLeft}>
           <View style={styles.avatarContainer}>
             <Image
-              source={{ uri: 'https://via.placeholder.com/40' }}
+              source={{
+                uri: user?.avatar_url || 'https://via.placeholder.com/40',
+              }}
               style={styles.avatarImage}
             />
-            <Text style={styles.avatarText}>Hello EngramSoft</Text>
+            <Text style={styles.avatarText}>
+              {user?.email.split('@')[0].toUpperCase()}
+            </Text>
           </View>
         </View>
         <View style={styles.headerRight}>

@@ -7,7 +7,7 @@ type CartItemType = {
   heroImage: string;
   price: number;
   quantity: number;
-  maxQuantity: number | null;
+  maxQuantity: number;
 };
 type CartState = {
   items: CartItemType[];
