@@ -54,7 +54,7 @@ const ProductDetails = () => {
       heroImage: product.heroImage,
       price: product.price,
       quantity,
-      maxQuantity: product.maxQuantity,
+      maxQuantity: product.maxQuantity!,
     });
     toast.show('Added to cart', {
       type: 'success',
