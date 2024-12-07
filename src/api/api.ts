@@ -26,11 +26,13 @@ export const getProduct = (slug: string) => {
       const { data, error } = await supabase
         .from('product')
         .select('*')
-        .match({ slug })
+        .eq('slug', slug)
         .single();
 
-      if (error) {
-        throw new Error('An error occurred while fetching data');
+      if (error || !data) {
+        throw new Error(
+          `An error occurred while fetching data: ${error?.message}`
+        );
       }
 
       return data;
