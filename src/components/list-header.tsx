@@ -12,8 +12,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { CATEGORIES } from '../../assets/categories';
 import { useCartStore } from '../store/cart-store';
 import { supabase } from '../lib/supabase';
+import { TablesInsert } from '../types/database.type';
 
-const ListHeader = () => {
+type Props = {
+  categories: TablesInsert<'category'>[];
+};  
+
+const ListHeader = ({categories}: Props) => {
   const { getItemCount } = useCartStore();
 
   const handleSignOut = async () => {
@@ -67,7 +72,7 @@ const ListHeader = () => {
       <View style={styles.categoriesContainer}>
         <Text style={styles.sectionTitle}>Categories</Text>
         <FlatList
-          data={CATEGORIES}
+          data={categories}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.name}
