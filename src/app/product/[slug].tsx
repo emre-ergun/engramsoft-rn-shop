@@ -28,7 +28,7 @@ const ProductDetails = () => {
   if (!product) return <Redirect href={'/404'} />;
 
   const increaseQuantity = () => {
-    if (quantity < product.maxQuantity) {
+    if (quantity < product.maxQuantity!) {
       setQuantity(prev => prev + 1);
       incrementItem(product.id);
     } else {
@@ -111,7 +111,7 @@ const ProductDetails = () => {
           <TouchableOpacity
             style={styles.quantityButton}
             onPress={increaseQuantity}
-            disabled={quantity >= product.maxQuantity}
+            disabled={quantity >= product.maxQuantity!}
           >
             <Text style={styles.quantityButtonText}>+</Text>
           </TouchableOpacity>

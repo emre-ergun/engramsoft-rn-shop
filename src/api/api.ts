@@ -39,3 +39,35 @@ export const getProduct = (slug: string) => {
     },
   });
 };
+
+export const getCategoryAndProducts = (categorySlug: string) => {
+  return useQuery({
+    queryKey: ['CategoryAndProducts', categorySlug],
+    queryFn: async () => {
+      const { data: category, error: categoryError } = await supabase
+        .from('category')
+        .select('*')
+        .eq('slug', categorySlug)
+        .single();
+
+      if (categoryError || !category) {
+        throw new Error(
+          `An error occurred while fetching category data: ${categoryError?.message}`
+        );
+      }
+
+      const { data: products, error: productsError } = await supabase
+        .from('product')
+        .select('*')
+        .eq('category', category.id);
+
+      if (productsError) {
+        throw new Error(
+          `An error occurred while fetching products data: ${productsError?.message}`
+        );
+      }
+
+      return { category, products };
+    },
+  });
+};

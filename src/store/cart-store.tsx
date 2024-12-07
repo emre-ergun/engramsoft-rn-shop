@@ -1,14 +1,13 @@
 import { create } from 'zustand';
 import { PRODUCTS } from '../../assets/products';
-import { ImageSourcePropType } from 'react-native';
 
 type CartItemType = {
   id: number;
   title: string;
-  heroImage: ImageSourcePropType;
+  heroImage: string;
   price: number;
   quantity: number;
-  maxQuantity: number;
+  maxQuantity: number | null;
 };
 type CartState = {
   items: CartItemType[];
