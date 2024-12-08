@@ -39,7 +39,7 @@ export type Database = {
       order: {
         Row: {
           created_at: string
-          description: string
+          description: string | null
           id: number
           slug: string
           status: string
@@ -48,7 +48,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          description: string
+          description?: string | null
           id?: number
           slug: string
           status: string
@@ -57,7 +57,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          description?: string
+          description?: string | null
           id?: number
           slug?: string
           status?: string
