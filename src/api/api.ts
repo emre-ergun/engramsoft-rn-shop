@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../providers/auth-provider';
-import { TablesInsert } from '../types/database.type';
 import { generateOrderSlug } from '../utils/utils';
 
 export const getProductsAndCategories = () => {
@@ -34,7 +33,7 @@ export const getProduct = (slug: string) => {
 
       if (error || !data) {
         throw new Error(
-          `An error occurred while fetching data: ${error?.message}`
+          'An error occurred while fetching data: ' + error?.message
         );
       }
 
@@ -45,7 +44,7 @@ export const getProduct = (slug: string) => {
 
 export const getCategoryAndProducts = (categorySlug: string) => {
   return useQuery({
-    queryKey: ['CategoryAndProducts', categorySlug],
+    queryKey: ['categoryAndProducts', categorySlug],
     queryFn: async () => {
       const { data: category, error: categoryError } = await supabase
         .from('category')
@@ -54,9 +53,7 @@ export const getCategoryAndProducts = (categorySlug: string) => {
         .single();
 
       if (categoryError || !category) {
-        throw new Error(
-          `An error occurred while fetching category data: ${categoryError?.message}`
-        );
+        throw new Error('An error occurred while fetching category data');
       }
 
       const { data: products, error: productsError } = await supabase
@@ -65,9 +62,7 @@ export const getCategoryAndProducts = (categorySlug: string) => {
         .eq('category', category.id);
 
       if (productsError) {
-        throw new Error(
-          `An error occurred while fetching products data: ${productsError?.message}`
-        );
+        throw new Error('An error occurred while fetching products data');
       }
 
       return { category, products };
@@ -86,13 +81,12 @@ export const getMyOrders = () => {
         .from('order')
         .select('*')
         .order('created_at', { ascending: false })
-        .eq('user', id!);
+        .eq('user', id);
 
-      if (error) {
+      if (error)
         throw new Error(
-          `An error occurred while fetching orders data: ${error.message}`
+          'An error occurred while fetching orders: ' + error.message
         );
-      }
 
       return data;
     },
@@ -101,7 +95,7 @@ export const getMyOrders = () => {
 
 export const createOrder = () => {
   const { user } = useAuth();
-  const id = user?.id!;
+  const id = user?.id;
 
   const slug = generateOrderSlug();
 
@@ -187,23 +181,22 @@ export const createOrderItem = () => {
 
 export const getMyOrder = (slug: string) => {
   const { user } = useAuth();
-  const id = user?.id!;
+  const id = user?.id;
 
   return useQuery({
-    queryKey: ['order', slug],
+    queryKey: ['orders', slug],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('order')
         .select('*, order_items:order_item(*, products:product(*))')
         .eq('slug', slug)
-        .eq('user', id)
+        .eq('user', id!)
         .single();
 
-      if (error || !data) {
+      if (error || !data)
         throw new Error(
-          `An error occurred while fetching order data: ${error.message}`
+          'An error occurred while fetching data: ' + error.message
         );
-      }
 
       return data;
     },
