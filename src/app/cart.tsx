@@ -129,7 +129,11 @@ const Cart = () => {
         <Text style={styles.totalText}>Total: ${getTotalPrice()}</Text>
         <TouchableOpacity
           onPress={handleCheckout}
-          style={styles.checkoutButton}
+          style={{
+            ...styles.checkoutButton,
+            opacity: items.length === 0 ? 0.5 : 1,
+          }}
+          disabled={items.length === 0}
         >
           <Text style={styles.checkoutButtonText}>Checkout</Text>
         </TouchableOpacity>
