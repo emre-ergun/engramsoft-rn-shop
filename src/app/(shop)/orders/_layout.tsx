@@ -1,6 +1,8 @@
 import { Stack } from 'expo-router';
+import { useOrderUpdateSubscription } from '../../../api/subscriptions';
 
 const OrderLayout = () => {
+  useOrderUpdateSubscription();
   return (
     <Stack>
       <Stack.Screen

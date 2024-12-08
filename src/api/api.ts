@@ -81,7 +81,7 @@ export const getMyOrders = () => {
         .from('order')
         .select('*')
         .order('created_at', { ascending: false })
-        .eq('user', id);
+        .eq('user', id!);
 
       if (error)
         throw new Error(
@@ -108,7 +108,7 @@ export const createOrder = () => {
         .insert({
           totalPrice,
           slug,
-          user: id,
+          user: id!,
           status: 'Pending',
         })
         .select('*')
@@ -123,7 +123,7 @@ export const createOrder = () => {
     },
 
     async onSuccess() {
-      await queryClient.invalidateQueries({ queryKey: ['order'] });
+      await queryClient.invalidateQueries({ queryKey: ['orders'] });
     },
   });
 };
