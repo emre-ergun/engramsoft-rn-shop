@@ -1,4 +1,4 @@
-# React Native Mobile App
+# React Native Mobile App - Shopping
 
 It is admin dashboard application developed for mobile shopping application to control products, categories and orders.
 
