@@ -6,12 +6,11 @@ import {
   Text,
   View,
   Image,
-  ImageSourcePropType,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { useCartStore } from '../store/cart-store';
 import { createOrder, createOrderItem } from '../api/api';
+import { openStripeCheckout, setupStripePaymentSheet } from '../lib/stripe';
 
 type CartItemType = {
   id: number;
@@ -82,6 +81,15 @@ const Cart = () => {
   const handleCheckout = async () => {
     const totalPrice = parseFloat(getTotalPrice());
     try {
+      await setupStripePaymentSheet(Math.floor(totalPrice * 100));
+
+      const result = await openStripeCheckout();
+
+      if (!result) {
+        alert('Error occured while processing payment');
+        return;
+      }
+
       await createSupabaseOrder(
         { totalPrice },
         {
